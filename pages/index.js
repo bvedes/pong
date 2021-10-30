@@ -1,66 +1,8 @@
 import { useState, useEffect } from "react";
-
-const Results = ({ pointsP1, pointsP2 }) => {
-  return (
-    <div className="flex justify-between w-full min-h-screen p-4">
-      <div className="text-9xl text-white p-16">{pointsP1}</div>
-      <div className="bg-white p-[2px] opacity-50"></div>
-      <div className="text-9xl text-white p-16">{pointsP2}</div>
-    </div>
-  );
-};
-
-const Ball = ({ left, top }) => {
-  const getBallStyle = () => {
-    if (top > 50 && left > 50) {
-      return { left: `calc(${left}% - 20px)`, top: `calc(${top}% - 20px)` };
-    }
-    if (left > 100) {
-      return { left: `calc(${left}% - 20px)`, top: `${top}%` };
-    }
-    if (top > 100) {
-      return { left: `${left}%`, top: `calc(${top}% - 20px)` };
-    }
-    return { left: `${left}%`, top: `${top}%` };
-  };
-
-  return (
-    <div
-      style={getBallStyle()}
-      className="fixed h-[20px] w-[20px] bg-white rounded-full opacity-80"
-    />
-  );
-};
-
-const Player1 = ({ position }) => {
-  return (
-    <div
-      style={{
-        position: "fixed",
-        background: "red",
-        height: "100px",
-        width: "20px",
-        top: `${position}%`,
-        left: 0,
-      }}
-    />
-  );
-};
-
-const Player2 = ({ position }) => {
-  return (
-    <div
-      style={{
-        position: "fixed",
-        background: "red",
-        height: "100px",
-        width: "20px",
-        top: `${position}%`,
-        right: 0,
-      }}
-    />
-  );
-};
+import Ball from "../components/Ball";
+import PlayerOne from "../components/PlayerOne";
+import PlayerTwo from "../components/PlayerTwo";
+import Results from "../components/Results ";
 
 const Pong = () => {
   const [pointsP1, setPointsP1] = useState(0);
@@ -98,7 +40,7 @@ const Pong = () => {
     };
   }, [positionP1]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     // setBallX(ballX + 1)
     // Use prevState to make state update based on the previous one.
     setBallX((prevState) => {
@@ -129,15 +71,15 @@ const Pong = () => {
         return prevState - speed;
       }
     });
-  }, [ballX, ballY, xDirection, yDirection]);
+  }, [ballX, ballY, xDirection, yDirection]);*/
 
   return (
     <div className="h-screen bg-gray-900">
       <div className="flex justify-between">
-        <Player1 position={positionP1} />
+        <PlayerOne position={positionP1} />
         <Results pointsP1={pointsP1} pointsP2={pointsP2} />
         <Ball left={ballX} top={ballY} />
-        <Player2 position={positionP2} />
+        <PlayerTwo position={positionP2} />
       </div>
     </div>
   );
